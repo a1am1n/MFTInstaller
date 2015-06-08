@@ -1,0 +1,17 @@
+<resources>
+
+    <color name="primaryColor">#f1c40f</color>
+
+
+    <color name="theme_primary">#2977AC</color>
+    <color name="primaryColor2">#E64A19</color>
+    <color name="primaryColorDark">#0D47A1</color>
+    <drawable name="list_normal">#00000000</drawable>
+    <drawable name="list_selected">#d1d1d1</drawable>
+    <color name="background_tab_pressed">#1AFFFFFF</color>
+    <color name="background_window">#FFE5E5E5</color>
+    <color name="green">#689F38</color>
+    <color name="greenDark">#3E5F22</color>
+    <color name="banana">#FFCC00</color>
+    <color name="back1">#efefef</color>
+</resources>
