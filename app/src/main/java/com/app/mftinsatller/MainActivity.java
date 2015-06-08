@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.twotoasters.jazzylistview.JazzyListView;
+import com.twotoasters.jazzylistview.effects.CardsEffect;
 import com.twotoasters.jazzylistview.effects.CurlEffect;
 
 
@@ -25,7 +26,7 @@ public class MainActivity extends ActionBarActivity {
 
         applistView = (JazzyListView)findViewById(R.id.applistView);
 
-        applistView.setTransitionEffect(new CurlEffect());
+        applistView.setTransitionEffect(new CardsEffect());
 
         ListAdapter adp = new ListAdapter(MainActivity.this);
         applistView.setAdapter(adp);
