@@ -20,4 +20,16 @@ public class PrefUtils {
         boolean status =preferences.getBoolean("user-login", false);
         return  status;
     }
+
+
+    public static User getUserData(Context ctx){
+        ComplexPreferences complexPreferences = ComplexPreferences.getComplexPreferences(ctx, "container_prefs", 0);
+        User user = complexPreferences.getObject("user", User.class);
+        return user;
+    }
+    public static void setUserData(User user, Context ctx){
+        ComplexPreferences complexPreferences = ComplexPreferences.getComplexPreferences(ctx, "container_prefs", 0);
+        complexPreferences.putObject("user", user);
+        complexPreferences.commit();
+    }
 }

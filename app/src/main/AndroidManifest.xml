@@ -38,6 +38,15 @@
 
         </activity>
 
+
+        <activity
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:name=".ForgotPasswordScreen"
+            android:screenOrientation="portrait"
+            android:label="@string/app_name" >
+
+        </activity>
+
         <activity android:name=".SplashScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="portrait">
