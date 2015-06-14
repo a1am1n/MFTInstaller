@@ -81,7 +81,7 @@ public class MainActivity extends ActionBarActivity {
                             String created_on = parseObjects.get(i).getString("upload_date");
                             String download_link = parseObjects.get(i).getString("download_link");
 
-                            Log.e("date",""+created_on);
+
 /*
 
                             String MainDate =  String.valueOf(created_on);
@@ -164,7 +164,7 @@ public class MainActivity extends ActionBarActivity {
             imgDownload.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(ctx,"Download link:- "+valuesAppLinks.get(i),Toast.LENGTH_LONG).show();
+                    Toast.makeText(ctx,"Download link:- "+valuesAppLinks.get(i),Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -198,6 +198,9 @@ public class MainActivity extends ActionBarActivity {
                 break;
             case R.id.logout:
                 PrefUtils.setLogin(MainActivity.this, false);
+                Intent i = new Intent(MainActivity.this,LoginScreen.class);
+                startActivity(i);
+                finish();
                 break;
         }
 

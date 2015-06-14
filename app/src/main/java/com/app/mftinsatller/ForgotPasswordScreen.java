@@ -55,8 +55,8 @@ public class ForgotPasswordScreen extends ActionBarActivity {
     ProgressDialog progressDialog;
     TextView txtSend;
     EditText etEmailID;
-    private static final String username = "unipexapp@gmail.com";
-    private static final String password = "exp@uni2015";
+    private static final String username = "mftinstaller@gmail.com";
+    private static final String password = "9TBu-p?j(k_h{r3esr/>6L!7{aj.`mA8;gH7MAa9";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -203,10 +203,10 @@ public class ForgotPasswordScreen extends ActionBarActivity {
 
     private Message createMessage(String email, String subject, String messageBody, Session session) throws MessagingException, UnsupportedEncodingException {
         Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress("unipexapp@gmail.com", "Container Details"));
+        message.setFrom(new InternetAddress("mftinstaller@gmail.com", "Forgot Password "));
 
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
-        message.setSubject("MFT Password Notification ");
+        message.setSubject("MFT Password Notification");
 
         message.setText(messageBody);
 
