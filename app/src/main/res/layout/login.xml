@@ -71,16 +71,43 @@
 
 </LinearLayout>
 
-    <TextView
-        android:layout_marginBottom="10dp"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginBottom="5dp"
         android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
         android:id="@+id/txtBTNRegister"
         android:gravity="center"
         android:layout_gravity="center"
-        android:textSize="18dp"
+        android:textSize="20dp"
         android:textColor="#494949"
         android:text="New Register?"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <TextView
+          android:gravity="center"
+        android:layout_gravity="center"
+        android:textSize="18dp"
+        android:textColor="#AD9E53"
+        android:textStyle="bold"
+        android:text="MTLFREETV.COM"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+        <TextView
+             android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="18dp"
+            android:textColor="#AD9E53"
+            android:text="Mtlfreetv@gmail.com"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </RelativeLayout>

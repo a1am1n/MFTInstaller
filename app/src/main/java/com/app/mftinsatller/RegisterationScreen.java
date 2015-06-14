@@ -18,13 +18,16 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import helpers.ComplexPreferences;
 import helpers.PrefUtils;
 import helpers.User;
-
+import android.util.Log;
 
 public class RegisterationScreen extends ActionBarActivity {
     private EditText etEmail,etUName,etPassword,etCnfPassword,etContact,etDevice;
@@ -113,6 +116,32 @@ public class RegisterationScreen extends ActionBarActivity {
             gameScore.put("user_password", uPassword);
             gameScore.put("user_contact",uContact);
             gameScore.put("user_device", uDevice);
+
+            gameScore.put("user_subscription", "false");
+
+/* date start*/
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+            String currentDateandTime = sdf.format(new Date());
+
+            String temp = currentDateandTime;
+
+            String day =  temp.substring(0,currentDateandTime.indexOf("/"));
+            String mon =  temp.substring(currentDateandTime.indexOf("/")+1,currentDateandTime.lastIndexOf("/"));
+            String year =  temp.substring(currentDateandTime.lastIndexOf("/")+1,currentDateandTime.length());
+
+            int month = Integer.valueOf(mon);
+            if(month==12)
+                month=01;
+            else
+                month+=1;
+
+            Log.e("current date", currentDateandTime);
+            Log.e("new date",day+"/"+month+"/"+year );
+/* date end */
+
+            gameScore.put("subscription_start_date", currentDateandTime);
+            gameScore.put("subscription_end_date", day+"/"+month+"/"+year);
 
             gameScore.saveInBackground();
             Toast.makeText(RegisterationScreen.this, "New Account Created sucessfully....", Toast.LENGTH_LONG).show();
