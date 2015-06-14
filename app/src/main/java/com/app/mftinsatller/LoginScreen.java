@@ -33,7 +33,7 @@ import helpers.User;
 
 public class LoginScreen extends ActionBarActivity implements View.OnClickListener {
     ProgressDialog progressDialog;
-    TextView txtBTNForgotPassword, txtBTNLogin;
+    TextView txtBTNForgotPassword, txtBTNLogin,txtBTNRegister;
     EditText etPassword, etEmailID;
 
     @Override
@@ -68,10 +68,12 @@ public class LoginScreen extends ActionBarActivity implements View.OnClickListen
     }
 
     private void initViews() {
+        txtBTNRegister= (TextView) findViewById(R.id.txtBTNRegister);
         txtBTNForgotPassword = (TextView) findViewById(R.id.txtBTNForgotPassword);
         txtBTNLogin = (TextView) findViewById(R.id.txtBTNLogin);
 
         txtBTNForgotPassword.setOnClickListener(this);
+        txtBTNRegister.setOnClickListener(this);
         txtBTNLogin.setOnClickListener(this);
 
         etPassword = (EditText) findViewById(R.id.etPassword);
@@ -184,6 +186,14 @@ public class LoginScreen extends ActionBarActivity implements View.OnClickListen
                 Intent i = new Intent(LoginScreen.this,ForgotPasswordScreen.class);
                 startActivity(i);
                 break;
+
+            case R.id.txtBTNRegister:
+
+                Intent i2 = new Intent(LoginScreen.this,RegisterationScreen.class);
+                startActivity(i2);
+                break;
+
+
         }
     }
 

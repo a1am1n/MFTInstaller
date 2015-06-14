@@ -135,6 +135,7 @@ public class RegisterationScreen extends ActionBarActivity {
             PrefUtils.setLogin(RegisterationScreen.this, true);
 
             Intent i = new Intent(RegisterationScreen.this, MainActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
             finish();
 

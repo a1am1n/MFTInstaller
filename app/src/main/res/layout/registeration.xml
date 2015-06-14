@@ -23,44 +23,64 @@
         android:layout_height="100dp" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
+        android:singleLine="true"
         android:id="@+id/etEmail"
         android:textColor="#b0b0b0"
-        android:layout_margin="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter email id"
         app:met_floatingLabel="normal" />
     <com.rengwuxian.materialedittext.MaterialEditText
+        android:singleLine="true"
         android:id="@+id/etUName"
         android:textColor="#b0b0b0"
-        android:layout_margin="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Full name"
         app:met_floatingLabel="normal" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
+        android:singleLine="true"
         android:id="@+id/etPassword"
         android:textColor="#b0b0b0"
         android:inputType="textPassword"
-        android:layout_margin="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter password"
         app:met_floatingLabel="normal" />
     <com.rengwuxian.materialedittext.MaterialEditText
+        android:singleLine="true"
         android:id="@+id/etCnfPassword"
         android:textColor="#b0b0b0"
         android:inputType="textPassword"
-        android:layout_margin="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Confirm password"
         app:met_floatingLabel="normal" />
     <com.rengwuxian.materialedittext.MaterialEditText
+        android:singleLine="true"
         android:id="@+id/etContact"
         android:textColor="#b0b0b0"
-        android:layout_margin="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:maxLength="10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
@@ -68,15 +88,20 @@
         app:met_floatingLabel="normal" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
+        android:singleLine="true"
         android:id="@+id/etDevice"
         android:textColor="#b0b0b0"
-        android:layout_margin="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Device name"
         app:met_floatingLabel="normal" />
 
     <TextView
+        android:layout_marginBottom="10dp"
         android:id="@+id/txtBtnRegister"
         android:layout_marginRight="30dp"
         android:gravity="right"

@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -6,7 +6,10 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/icon"
         android:layout_marginTop="20dp"
@@ -16,19 +19,27 @@
         android:layout_height="100dp" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
+        android:singleLine="true"
         android:id="@+id/etEmailID"
         android:textColor="#b0b0b0"
-        android:layout_margin="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter email id"
         app:met_floatingLabel="normal" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
+        android:singleLine="true"
         android:id="@+id/etPassword"
         android:textColor="#b0b0b0"
         android:inputType="textPassword"
-        android:layout_margin="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter password"
@@ -58,5 +69,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-
 </LinearLayout>
+
+    <TextView
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/txtBTNRegister"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textSize="18dp"
+        android:textColor="#494949"
+        android:text="New Register?"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
