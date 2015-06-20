@@ -3,6 +3,9 @@ package com.app.mftinsatller;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,6 +26,12 @@ import com.twotoasters.jazzylistview.JazzyListView;
 import com.twotoasters.jazzylistview.effects.CardsEffect;
 import com.twotoasters.jazzylistview.effects.CurlEffect;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -75,7 +84,7 @@ public class MainActivity extends ActionBarActivity {
                         ArrayList<String> appDates = new ArrayList<String>();
                         ArrayList<String> appLinks = new ArrayList<String>();
 
-                        for(int i=0;i<parseObjects.size();i++){
+                        for (int i = 0; i < parseObjects.size(); i++) {
 
                             String app_name = parseObjects.get(i).getString("app_name");
                             String created_on = parseObjects.get(i).getString("upload_date");
@@ -90,12 +99,12 @@ public class MainActivity extends ActionBarActivity {
 
 */
 
-                            appNames.add(i,app_name);
-                            appDates.add(i,created_on);
-                            appLinks.add(i,download_link);
+                            appNames.add(i, app_name);
+                            appDates.add(i, created_on);
+                            appLinks.add(i, download_link);
                         }
 
-                       ListAdapter adp = new ListAdapter(MainActivity.this,appNames,appDates,appLinks);
+                        ListAdapter adp = new ListAdapter(MainActivity.this, appNames, appDates, appLinks);
                         applistView.setAdapter(adp);
 
 
@@ -112,6 +121,92 @@ public class MainActivity extends ActionBarActivity {
             }
         });
     }
+
+
+
+    void callDownloadAscyntask(final String appURL,final String appName){
+
+        new AsyncTask<Void,Void,Void>(){
+            ProgressDialog dialog;
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                dialog = new ProgressDialog(MainActivity.this);
+                dialog.setMessage("Downloading application");
+                dialog.setCancelable(false);
+                dialog.show();
+            }
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                DownloadOnSDcard(appURL,appName);
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+
+                dialog.dismiss();
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/MFT/" + appName)), "application/vnd.android.package-archive");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+            }
+        }.execute();
+    }
+
+
+    // Download On My Mobile SDCard or Emulator.
+    public void DownloadOnSDcard(String apkpath,String apkname)
+    {
+        try{
+            //URL url = new URL(urlpath.toString()); // Your given URL.
+
+            URL url = new URL(apkpath); // Your given URL.
+
+            HttpURLConnection c = (HttpURLConnection) url.openConnection();
+            c.setRequestMethod("GET");
+            c.setDoOutput(true);
+            c.connect(); // Connection Complete here.!
+
+            //Toast.makeText(getApplicationContext(), "HttpURLConnection complete.", Toast.LENGTH_SHORT).show();
+
+            String PATH = Environment.getExternalStorageDirectory() + "/MFT/";
+            File file = new File(PATH); // PATH = /mnt/sdcard/download/
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            File outputFile = new File(file, apkname);
+            FileOutputStream fos = new FileOutputStream(outputFile);
+
+            //      Toast.makeText(getApplicationContext(), "SD Card Path: " + outputFile.toString(), Toast.LENGTH_SHORT).show();
+
+            InputStream is = c.getInputStream(); // Get from Server and Catch In Input Stream Object.
+
+            byte[] buffer = new byte[1024];
+            int len1 = 0;
+            while ((len1 = is.read(buffer)) != -1) {
+                fos.write(buffer, 0, len1); // Write In FileOutputStream.
+            }
+            fos.close();
+            is.close();//till here, it works fine - .apk is download to my sdcard in download file.
+            // So plz Check in DDMS tab and Select your Emualtor.
+
+            //Toast.makeText(getApplicationContext(), "Download Complete on SD Card.!", Toast.LENGTH_SHORT).show();
+            //download the APK to sdcard then fire the Intent.
+        }
+        catch (IOException e)
+        {
+            Log.e("Error in download - ",e.toString());
+          /*  Toast.makeText(getApplicationContext(), "Error! " +
+                    e.toString(), Toast.LENGTH_LONG).show();*/
+        }
+    }
+
 
     class ListAdapter extends BaseAdapter {
         LayoutInflater layoutInflator;
@@ -164,7 +259,10 @@ public class MainActivity extends ActionBarActivity {
             imgDownload.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(ctx,"Download link:- "+valuesAppLinks.get(i),Toast.LENGTH_SHORT).show();
+
+                    callDownloadAscyntask(valuesAppLinks.get(i), valuesAppNames.get(i) + ".apk");
+                    Log.e("Download link:- ", valuesAppLinks.get(i));
+                    //Toast.makeText(ctx,"Download link:- "+valuesAppLinks.get(i),Toast.LENGTH_SHORT).show();
                 }
             });
 
