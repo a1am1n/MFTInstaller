@@ -194,7 +194,7 @@ public class LoginScreen extends ActionBarActivity implements View.OnClickListen
 
             case R.id.txtBTNRegister:
 
-                Intent i2 = new Intent(LoginScreen.this,RegisterationScreen.class);
+                Intent i2 = new Intent(LoginScreen.this,RegistrationVerification.class);
                 startActivity(i2);
                 break;
 

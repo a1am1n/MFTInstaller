@@ -33,11 +33,14 @@ public class RegisterationScreen extends ActionBarActivity {
     private EditText etEmail,etUName,etPassword,etCnfPassword,etContact,etDevice;
     private TextView txtBtnRegister;
     ProgressDialog progressDialog;
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registeration);
+
+        email = getIntent().getStringExtra("email");
 
         initView();
 
@@ -183,6 +186,9 @@ public class RegisterationScreen extends ActionBarActivity {
         etCnfPassword = (EditText)findViewById(R.id.etCnfPassword);
         etContact = (EditText)findViewById(R.id.etContact);
         etDevice = (EditText)findViewById(R.id.etDevice);
+
+        etEmail.setText(email);
+        etEmail.setEnabled(false);
     }
 
 

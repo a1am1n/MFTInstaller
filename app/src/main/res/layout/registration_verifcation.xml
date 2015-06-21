@@ -1,0 +1,64 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_gravity="center"
+        android:src="@mipmap/ic_launcher"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:singleLine="true"
+        android:id="@+id/etEmail"
+        android:textColor="#b0b0b0"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter email id for registration"
+        app:met_floatingLabel="normal" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:singleLine="true"
+        android:id="@+id/etCode"
+        android:textColor="#b0b0b0"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter verification code"
+        app:met_floatingLabel="normal" />
+
+
+
+    <TextView
+        android:id="@+id/txtVerify"
+        android:layout_marginRight="30dp"
+        android:gravity="right"
+        android:layout_gravity="right"
+        android:textStyle="bold"
+        android:textSize="24dp"
+        android:textColor="#494949"
+        android:text="Verify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textSize="16dp"
+        android:textColor="#AD9E53"
+        android:text="Please Enter verification code provided by MFT Administrator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
