@@ -43,7 +43,7 @@ import android.util.Log;
 
 public class MainActivity extends ActionBarActivity {
     JazzyListView applistView;
-    ProgressDialog progressDialog;
+    ProgressDialog progressDialog,progressDialog2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,28 +54,80 @@ public class MainActivity extends ActionBarActivity {
         applistView.setTransitionEffect(new CardsEffect());
 
 
-        fetchAPK_Info();
 
+        ComplexPreferences complexPreferences = ComplexPreferences.getComplexPreferences(MainActivity.this, "user_pref", 0);
+        User userData = complexPreferences.getObject("current-user", User.class);
+        Log.e("email ",userData.Email);
 
-
+        checkBlockStatus(userData.Email);
 
 
 
     }
 
 
-    private void fetchAPK_Info(){
+    private void checkBlockStatus(final String useremail) {
+
         progressDialog = new ProgressDialog(MainActivity.this);
-        progressDialog.setMessage("Please wait...");
+        progressDialog.setMessage("Checking details...");
         progressDialog.setCancelable(false);
         progressDialog.show();
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("User_details");
+        query.whereEqualTo("user_email", useremail);
+
+
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> parseObjects, ParseException e) {
+                progressDialog.dismiss();
+
+                if (e == null) {
+                    if (parseObjects.size() != 0) {
+
+                        boolean isBlock = parseObjects.get(0).getBoolean("block");
+
+                        if(isBlock){
+
+                            Log.e("inside block","inside");
+                            Toast.makeText(MainActivity.this, "You are account is BLOCKED, Please contact to MFT Administrator !!!", Toast.LENGTH_LONG).show();
+
+                            PrefUtils.setLogin(MainActivity.this, false);
+
+                            Intent i = new Intent(MainActivity.this,LoginScreen.class);
+                            startActivity(i);
+                            finish();
+                        }else {
+
+                            Log.e("inside block","outside ");
+                            fetchAPK_Info();
+                        }
+
+
+                    }
+
+                } else {
+                    Toast.makeText(MainActivity.this, "Error to fetch details !!!", Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+        });
+
+    }
+
+    private void fetchAPK_Info(){
+        progressDialog2 = new ProgressDialog(MainActivity.this);
+        progressDialog2.setMessage("Please wait...");
+        progressDialog2.setCancelable(false);
+        progressDialog2.show();
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("APK_Info");
 
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> parseObjects, ParseException e) {
-                progressDialog.dismiss();
+                progressDialog2.dismiss();
 
                 if (e == null) {
                     if (parseObjects.size() != 0) {
@@ -91,14 +143,6 @@ public class MainActivity extends ActionBarActivity {
                             String download_link = parseObjects.get(i).getString("download_link");
 
 
-/*
-
-                            String MainDate =  String.valueOf(created_on);
-                           String tempDate =  MainDate;
-                        //   String formattedDate = tempDate.substring(0,MainDate.lastIndexOf(","));
-
-*/
-
                             appNames.add(i, app_name);
                             appDates.add(i, created_on);
                             appLinks.add(i, download_link);
@@ -110,7 +154,7 @@ public class MainActivity extends ActionBarActivity {
 
                     } else {
 
-                        Toast.makeText(MainActivity.this, "Login Failed. Please check email or password !!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Unable to fetch data !!!", Toast.LENGTH_SHORT).show();
                     }
 
                 } else {
