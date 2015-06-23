@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -87,6 +88,43 @@ public class MainActivity extends ActionBarActivity {
 
                         boolean isBlock = parseObjects.get(0).getBoolean("block");
 
+                        Date sub_end_date = parseObjects.get(0).getDate("subscription_end_date");
+
+                        String sub_end_date_string = String.valueOf(sub_end_date);
+
+                        boolean isSubscriptionExpiry=false;
+
+                        //Tue Jun 23 16:42:00 GMT 2015
+                        SimpleDateFormat sdfTime = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'GMT' yyyy");
+
+
+                        try {
+                            Date sub_endDate = sdfTime.parse(sub_end_date_string);
+
+                            Date nowDate = new Date();
+                            String today_date_string = String.valueOf(sub_end_date);
+
+                            if (nowDate.after(sub_endDate)) {
+                                Log.e("### inside if",""+ nowDate);
+                                isSubscriptionExpiry = true;
+                            } else if (nowDate.before(sub_endDate)) {
+                                Log.e("### inside else",""+ nowDate);
+                                isSubscriptionExpiry = false;
+                            } else if (nowDate.equals(sub_endDate)) {
+                                Log.e("### inside equal",""+ nowDate);
+                                isSubscriptionExpiry = false;
+                            }
+
+
+                        }catch (Exception ee){
+                            Log.e("---- EXCe",""+ ee.toString());
+                            isSubscriptionExpiry = false;
+                        }
+
+
+
+
+
                         if(isBlock){
 
                             Log.e("inside block","inside");
@@ -97,9 +135,19 @@ public class MainActivity extends ActionBarActivity {
                             Intent i = new Intent(MainActivity.this,LoginScreen.class);
                             startActivity(i);
                             finish();
+                        }else if(isSubscriptionExpiry){
+                            Log.e("inside else if", "inside sub expiry");
+
+                            Toast.makeText(MainActivity.this, "Your Free Trial version is expired, Please contact to MFT Administrator !!!", Toast.LENGTH_LONG).show();
+
+                            //PrefUtils.setLogin(MainActivity.this, false);
+
+                           // Intent i = new Intent(MainActivity.this,LoginScreen.class);
+                            //startActivity(i);
+                           // finish();
                         }else {
 
-                            Log.e("inside block","outside ");
+                            Log.e("inside block","else ");
                             fetchAPK_Info();
                         }
 

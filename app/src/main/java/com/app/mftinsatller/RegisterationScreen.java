@@ -122,29 +122,24 @@ public class RegisterationScreen extends ActionBarActivity {
 
             gameScore.put("user_subscription", "false");
 
-/* date start*/
-            Calendar c = Calendar.getInstance();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
-            String currentDateandTime = sdf.format(new Date());
 
-            String temp = currentDateandTime;
 
-            String day =  temp.substring(0,currentDateandTime.indexOf("/"));
-            String mon =  temp.substring(currentDateandTime.indexOf("/")+1,currentDateandTime.lastIndexOf("/"));
-            String year =  temp.substring(currentDateandTime.lastIndexOf("/")+1,currentDateandTime.length());
 
-            int month = Integer.valueOf(mon);
-            if(month==12)
-                month=01;
-            else
-                month+=1;
+         //   SimpleDateFormat sdfTime = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'GMT' yyyy");
 
-            Log.e("current date", currentDateandTime);
-            Log.e("new date",day+"/"+month+"/"+year );
-/* date end */
 
-            gameScore.put("subscription_start_date", currentDateandTime);
-            gameScore.put("subscription_end_date", day+"/"+month+"/"+year);
+            Date StartDate = new Date();
+
+            Date EndDate = StartDate; // wherever you get this from
+
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(EndDate);
+            cal.add(Calendar.DATE, 7); // add 10 days
+            EndDate = cal.getTime();
+
+            gameScore.put("subscription_start_date", StartDate);
+            gameScore.put("subscription_end_date", EndDate);
+            gameScore.put("block", false);
 
             gameScore.saveInBackground();
             Toast.makeText(RegisterationScreen.this, "New Account Created sucessfully....", Toast.LENGTH_LONG).show();
