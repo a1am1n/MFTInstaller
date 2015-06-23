@@ -140,11 +140,11 @@ public class MainActivity extends ActionBarActivity {
 
                             Toast.makeText(MainActivity.this, "Your Free Trial version is expired, Please contact to MFT Administrator !!!", Toast.LENGTH_LONG).show();
 
-                            //PrefUtils.setLogin(MainActivity.this, false);
+                            PrefUtils.setLogin(MainActivity.this, false);
 
-                           // Intent i = new Intent(MainActivity.this,LoginScreen.class);
-                            //startActivity(i);
-                           // finish();
+                            Intent i = new Intent(MainActivity.this,LoginScreen.class);
+                            startActivity(i);
+                            finish();
                         }else {
 
                             Log.e("inside block","else ");
