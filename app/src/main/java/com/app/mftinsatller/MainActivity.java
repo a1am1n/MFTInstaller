@@ -18,6 +18,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -45,10 +49,27 @@ import android.util.Log;
 public class MainActivity extends ActionBarActivity {
     JazzyListView applistView;
     ProgressDialog progressDialog,progressDialog2;
+    InterstitialAd interstitial;
+    AdRequest adRequest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+        interstitial = new InterstitialAd(MainActivity.this);
+        interstitial.setAdUnitId("ca-app-pub-1878227272753934/8361723600");
+
+
+        AdView adView = (AdView) this.findViewById(R.id.adView);
+        // Request for Ads
+        adRequest = new AdRequest.Builder()
+                .build();
+
+        // Load ads into Banner Ads
+        adView.loadAd(adRequest);
+
 
         applistView = (JazzyListView)findViewById(R.id.applistView);
 
@@ -64,6 +85,14 @@ public class MainActivity extends ActionBarActivity {
 
 
 
+    }
+
+
+    public void displayInterstitial() {
+        // If Ads are loaded, show Interstitial else show nothing.
+        if (interstitial.isLoaded()) {
+            interstitial.show();
+        }
     }
 
 
@@ -243,7 +272,7 @@ public class MainActivity extends ActionBarActivity {
                 dialog.dismiss();
 
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/MFT/" + appName)), "application/vnd.android.package-archive");
+                intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/.MFT/" + appName)), "application/vnd.android.package-archive");
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
 
@@ -267,8 +296,22 @@ public class MainActivity extends ActionBarActivity {
 
             //Toast.makeText(getApplicationContext(), "HttpURLConnection complete.", Toast.LENGTH_SHORT).show();
 
-            String PATH = Environment.getExternalStorageDirectory() + "/MFT/";
-            File file = new File(PATH); // PATH = /mnt/sdcard/download/
+            String PATH = Environment.getExternalStorageDirectory() + "/.MFT/";
+            File file = new File(PATH);
+
+try {
+    // to delete previous files starts
+    String[] entries = file.list();
+    for (String s : entries) {
+        File currentFile = new File(file.getPath(), s);
+        currentFile.delete();
+    }
+    file.delete();
+    // to delete previous files ends
+}catch (Exception e){
+    Log.e("###### Exc ",e.toString());
+}
+
             if (!file.exists()) {
                 file.mkdirs();
             }
@@ -355,6 +398,16 @@ public class MainActivity extends ActionBarActivity {
                     callDownloadAscyntask(valuesAppLinks.get(i), valuesAppNames.get(i) + ".apk");
                     Log.e("Download link:- ", valuesAppLinks.get(i));
                     //Toast.makeText(ctx,"Download link:- "+valuesAppLinks.get(i),Toast.LENGTH_SHORT).show();
+
+
+                    interstitial.loadAd(adRequest);
+                    // Prepare an Interstitial Ad Listener
+                    interstitial.setAdListener(new AdListener() {
+                        public void onAdLoaded() {
+                            // Call displayInterstitial() function
+                            displayInterstitial();
+                        }
+                    });
                 }
             });
 
