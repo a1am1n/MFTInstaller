@@ -59,7 +59,7 @@ public class MainActivity extends ActionBarActivity {
 
 
         interstitial = new InterstitialAd(MainActivity.this);
-        interstitial.setAdUnitId("ca-app-pub-1878227272753934/8361723600");
+        interstitial.setAdUnitId("ca-app-pub-4832975497842027/7436223590");
 
 
         AdView adView = (AdView) this.findViewById(R.id.adView);
