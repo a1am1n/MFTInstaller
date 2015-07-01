@@ -3,15 +3,16 @@
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp"
-    android:paddingTop="8dp"
 
-    android:paddingBottom="8dp"
     android:background="#ffffff"
     tools:context=".MainActivity">
 
     <com.twotoasters.jazzylistview.JazzyListView
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
+
+        android:paddingBottom="8dp"
         android:dividerHeight="5dp"
         android:divider="#ffffff"
         android:id="@+id/applistView"
@@ -33,7 +34,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             ads:adSize="BANNER"
-
             ads:adUnitId="ca-app-pub-4832975497842027/5959490392" />
     </RelativeLayout>
 

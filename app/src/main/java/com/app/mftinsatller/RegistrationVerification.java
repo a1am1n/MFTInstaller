@@ -24,6 +24,8 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.regex.Pattern;
@@ -68,7 +70,30 @@ public class RegistrationVerification extends ActionBarActivity {
                     else if (isEmptyField(etCode)) {
                         Toast.makeText(RegistrationVerification.this, "Please enter verification code !!!", Toast.LENGTH_SHORT).show();
                     } else {
-                        processCheckUser(etEmail.getText().toString().trim().toUpperCase(),etCode.getText().toString().trim());
+
+                        Calendar calendar = Calendar.getInstance();
+                        // Get current day from calendar
+                        int day = calendar.get(Calendar.DATE);
+                        // Get current month from calendar
+                        int month = calendar.get(Calendar.MONTH);
+                        // Get current year from calendar
+                        int year = calendar.get(Calendar.YEAR);
+
+
+                        Log.e("date",""+day+"#"+month+"#"+year);
+                        if(day<=20 && (month+1) == 7 && year == 2015){
+                            if(etCode.getText().toString().trim().equals("MTLFREETV")){
+                                Intent i2 = new Intent(RegistrationVerification.this,RegisterationScreen.class);
+                                i2.putExtra("email",etEmail.getText().toString().trim().toUpperCase());
+                                startActivity(i2);
+                                finish();
+
+                            } else {
+                                Toast.makeText(RegistrationVerification.this, "Please enter correct code !!!", Toast.LENGTH_LONG).show();
+                            }
+                        }else{
+                            processCheckUser(etEmail.getText().toString().trim().toUpperCase(),etCode.getText().toString().trim());
+                        }
 
                     }
 

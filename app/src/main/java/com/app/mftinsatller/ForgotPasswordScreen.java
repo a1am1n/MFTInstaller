@@ -56,7 +56,7 @@ public class ForgotPasswordScreen extends ActionBarActivity {
     TextView txtSend;
     EditText etEmailID;
     private static final String username = "mftinstaller@gmail.com";
-    private static final String password = "9TBu-p?j(k_h{r3esr/>6L!7{aj.`mA8;gH7MAa9";
+    private static final String password = "MsJfA!sGq9dUaen_tNeZ@SFq*c76!B4+@*vBG!pY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -62,7 +62,7 @@ public class MainActivity extends ActionBarActivity {
         interstitial.setAdUnitId("ca-app-pub-4832975497842027/7436223590");
 
 
-        AdView adView = (AdView) this.findViewById(R.id.adView);
+        AdView adView = (AdView) findViewById(R.id.adView);
         // Request for Ads
         adRequest = new AdRequest.Builder()
                 .build();
