@@ -77,12 +77,16 @@ public class MainActivity extends ActionBarActivity {
 
 
 
+/*
         ComplexPreferences complexPreferences = ComplexPreferences.getComplexPreferences(MainActivity.this, "user_pref", 0);
         User userData = complexPreferences.getObject("current-user", User.class);
         Log.e("email ",userData.Email);
 
         checkBlockStatus(userData.Email);
+*/
 
+
+        fetchAPK_Info();
 
 
     }
