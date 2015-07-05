@@ -94,6 +94,7 @@
         </activity>
 
 
+        <activity android:name=".Aboutus" android:screenOrientation="portrait"/>
 
         <!-- For google ads starts-->
         <meta-data

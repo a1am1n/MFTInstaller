@@ -441,14 +441,11 @@ try {
 
         switch (id){
             case R.id.action_settings:
-
-                break;
-            case R.id.logout:
-                PrefUtils.setLogin(MainActivity.this, false);
-                Intent i = new Intent(MainActivity.this,LoginScreen.class);
+                Intent i = new Intent(MainActivity.this,Aboutus.class);
                 startActivity(i);
                 finish();
                 break;
+
         }
 
         return super.onOptionsItemSelected(item);

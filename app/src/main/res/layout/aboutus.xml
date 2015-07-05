@@ -1,0 +1,87 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#494949"
+        android:text="MTLFREETV.COM"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:gravity="center"
+        android:textStyle="italic"
+        android:textSize="18dp"
+        android:textColor="#494949"
+        android:text="The Future of Television"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#494949"
+        android:text="Contact Us (Suggestions/Bugs/Inquiries)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/txtContact"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:textStyle="normal"
+        android:textSize="16dp"
+        android:textColor="#0a7ea4"
+        android:text="http://mtlfreetv.com/contact-us/contact-us-form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#494949"
+        android:text="YouTube Channel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/youtube"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:textStyle="normal"
+        android:textSize="16dp"
+        android:textColor="#0a7ea4"
+        android:text="https://www.youtube.com/channel/UC389S4_2Yt9cei1qNDwmBrA?sub_confirmation=1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#494949"
+        android:text="VPN Services"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/txtvpn"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:textStyle="normal"
+        android:textSize="16dp"
+        android:textColor="#0a7ea4"
+        android:text="https://www.bit.ly/mftvpn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
