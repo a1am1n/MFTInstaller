@@ -443,7 +443,7 @@ try {
             case R.id.action_settings:
                 Intent i = new Intent(MainActivity.this,Aboutus.class);
                 startActivity(i);
-                finish();
+
                 break;
 
         }
