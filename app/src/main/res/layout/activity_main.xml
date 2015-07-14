@@ -8,11 +8,6 @@
     tools:context=".MainActivity">
 
     <com.twotoasters.jazzylistview.JazzyListView
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingTop="8dp"
-
-        android:paddingBottom="8dp"
         android:dividerHeight="5dp"
         android:divider="#ffffff"
         android:id="@+id/applistView"
@@ -20,7 +15,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_above="@+id/ad"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
+    <com.astuetz.PagerSlidingTabStrip
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="48dip"
+        android:background="@drawable/background_tabs" />
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/colors"
+        android:layout_below="@+id/tabs"
+        tools:context=".MainActivity" />
+</LinearLayout>
 
     <RelativeLayout
         android:gravity="center"

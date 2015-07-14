@@ -3,11 +3,17 @@ package com.app.mftinsatller;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -51,6 +58,10 @@ public class MainActivity extends ActionBarActivity {
     ProgressDialog progressDialog,progressDialog2;
     InterstitialAd interstitial;
     AdRequest adRequest;
+
+    private PagerSlidingTabStrip tabs;
+    private ViewPager pager;
+    private MyPagerAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,11 +95,31 @@ public class MainActivity extends ActionBarActivity {
 
         checkBlockStatus(userData.Email);
 */
-
+        init();
 
         fetchAPK_Info();
 
 
+    }
+
+    private void init(){
+        tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        pager = (ViewPager) findViewById(R.id.pager);
+        adapter = new MyPagerAdapter(getSupportFragmentManager());
+
+
+//        tabs.setDividerColorResource(Color.WHITE);
+        tabs.setIndicatorColorResource(R.color.theme_primary);
+        tabs.setShouldExpand(true);
+        pager.setAdapter(adapter);
+
+
+        final int pageMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources()
+                .getDisplayMetrics());
+        pager.setPageMargin(pageMargin);
+
+
+        tabs.setViewPager(pager);
     }
 
 
@@ -345,6 +376,72 @@ try {
                     e.toString(), Toast.LENGTH_LONG).show();*/
         }
     }
+
+
+
+
+    public class MyPagerAdapter extends FragmentPagerAdapter {
+
+
+
+
+        private final String[] TITLES = { "Pending", "Participant", "Message" };
+
+
+
+
+        public MyPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+
+
+
+
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return TITLES[position];
+        }
+
+
+
+
+        @Override
+        public int getCount() {
+            return TITLES.length;
+        }
+
+
+
+
+        @Override
+        public Fragment getItem(int position) {
+
+
+            if (position==0) {
+                return Fragment1.newInstance();
+            }else if(position==1) {
+                return Fragment1.newInstance();
+            }else if(position==2) {
+                return Fragment1.newInstance();
+            }else{
+                return Fragment1.newInstance();
+            }
+        }
+
+
+
+
+    }
+
+
+
+
+
+
+
+
 
 
     class ListAdapter extends BaseAdapter {
