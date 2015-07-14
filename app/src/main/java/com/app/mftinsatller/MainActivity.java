@@ -54,8 +54,8 @@ import helpers.User;
 import android.util.Log;
 
 public class MainActivity extends ActionBarActivity {
-    JazzyListView applistView;
-    ProgressDialog progressDialog,progressDialog2;
+
+
     InterstitialAd interstitial;
     AdRequest adRequest;
 
@@ -82,9 +82,7 @@ public class MainActivity extends ActionBarActivity {
         adView.loadAd(adRequest);
 
 
-        applistView = (JazzyListView)findViewById(R.id.applistView);
 
-        applistView.setTransitionEffect(new CardsEffect());
 
 
 
@@ -97,7 +95,7 @@ public class MainActivity extends ActionBarActivity {
 */
         init();
 
-        fetchAPK_Info();
+
 
 
     }
@@ -131,7 +129,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    private void checkBlockStatus(final String useremail) {
+    /*private void checkBlockStatus(final String useremail) {
 
         progressDialog = new ProgressDialog(MainActivity.this);
         progressDialog.setMessage("Checking details...");
@@ -212,7 +210,7 @@ public class MainActivity extends ActionBarActivity {
                         }else {
 
                             Log.e("inside block","else ");
-                            fetchAPK_Info();
+                         //   fetchAPK_Info();
                         }
 
 
@@ -227,155 +225,9 @@ public class MainActivity extends ActionBarActivity {
         });
 
     }
-
-    private void fetchAPK_Info(){
-        progressDialog2 = new ProgressDialog(MainActivity.this);
-        progressDialog2.setMessage("Please wait...");
-        progressDialog2.setCancelable(false);
-        progressDialog2.show();
-
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("APK_Info");
-
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> parseObjects, ParseException e) {
-                progressDialog2.dismiss();
-
-                if (e == null) {
-                    if (parseObjects.size() != 0) {
-
-                        ArrayList<String> appNames = new ArrayList<String>();
-                        ArrayList<String> appDates = new ArrayList<String>();
-                        ArrayList<String> appLinks = new ArrayList<String>();
-
-                        for (int i = 0; i < parseObjects.size(); i++) {
-
-                            String app_name = parseObjects.get(i).getString("app_name");
-                            String created_on = parseObjects.get(i).getString("upload_date");
-                            String download_link = parseObjects.get(i).getString("download_link");
+*/
 
 
-                            appNames.add(i, app_name);
-                            appDates.add(i, created_on);
-                            appLinks.add(i, download_link);
-                        }
-
-                        ListAdapter adp = new ListAdapter(MainActivity.this, appNames, appDates, appLinks);
-                        applistView.setAdapter(adp);
-
-
-                    } else {
-
-                        Toast.makeText(MainActivity.this, "Unable to fetch data !!!", Toast.LENGTH_SHORT).show();
-                    }
-
-                } else {
-                    Toast.makeText(MainActivity.this, "Error to fetch details !!!", Toast.LENGTH_SHORT).show();
-
-                }
-
-            }
-        });
-    }
-
-
-
-    void callDownloadAscyntask(final String appURL,final String appName){
-
-        new AsyncTask<Void,Void,Void>(){
-            ProgressDialog dialog;
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                dialog = new ProgressDialog(MainActivity.this);
-                dialog.setMessage("Downloading application");
-                dialog.setCancelable(false);
-                dialog.show();
-            }
-
-            @Override
-            protected Void doInBackground(Void... voids) {
-                DownloadOnSDcard(appURL,appName);
-
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-
-                dialog.dismiss();
-
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/.MFT/" + appName)), "application/vnd.android.package-archive");
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-
-            }
-        }.execute();
-    }
-
-
-    // Download On My Mobile SDCard or Emulator.
-    public void DownloadOnSDcard(String apkpath,String apkname)
-    {
-        try{
-            //URL url = new URL(urlpath.toString()); // Your given URL.
-
-            URL url = new URL(apkpath); // Your given URL.
-
-            HttpURLConnection c = (HttpURLConnection) url.openConnection();
-            c.setRequestMethod("GET");
-            c.setDoOutput(true);
-            c.connect(); // Connection Complete here.!
-
-            //Toast.makeText(getApplicationContext(), "HttpURLConnection complete.", Toast.LENGTH_SHORT).show();
-
-            String PATH = Environment.getExternalStorageDirectory() + "/.MFT/";
-            File file = new File(PATH);
-
-try {
-    // to delete previous files starts
-    String[] entries = file.list();
-    for (String s : entries) {
-        File currentFile = new File(file.getPath(), s);
-        currentFile.delete();
-    }
-    file.delete();
-    // to delete previous files ends
-}catch (Exception e){
-    Log.e("###### Exc ",e.toString());
-}
-
-            if (!file.exists()) {
-                file.mkdirs();
-            }
-            File outputFile = new File(file, apkname);
-            FileOutputStream fos = new FileOutputStream(outputFile);
-
-            //      Toast.makeText(getApplicationContext(), "SD Card Path: " + outputFile.toString(), Toast.LENGTH_SHORT).show();
-
-            InputStream is = c.getInputStream(); // Get from Server and Catch In Input Stream Object.
-
-            byte[] buffer = new byte[1024];
-            int len1 = 0;
-            while ((len1 = is.read(buffer)) != -1) {
-                fos.write(buffer, 0, len1); // Write In FileOutputStream.
-            }
-            fos.close();
-            is.close();//till here, it works fine - .apk is download to my sdcard in download file.
-            // So plz Check in DDMS tab and Select your Emualtor.
-
-            //Toast.makeText(getApplicationContext(), "Download Complete on SD Card.!", Toast.LENGTH_SHORT).show();
-            //download the APK to sdcard then fire the Intent.
-        }
-        catch (IOException e)
-        {
-            Log.e("Error in download - ",e.toString());
-          /*  Toast.makeText(getApplicationContext(), "Error! " +
-                    e.toString(), Toast.LENGTH_LONG).show();*/
-        }
-    }
 
 
 
@@ -385,7 +237,7 @@ try {
 
 
 
-        private final String[] TITLES = { "Pending", "Participant", "Message" };
+        private final String[] TITLES = { "Recommended", "Movies/TV", "Live TV","Music" };
 
 
 
@@ -422,9 +274,11 @@ try {
             if (position==0) {
                 return Fragment1.newInstance();
             }else if(position==1) {
-                return Fragment1.newInstance();
+                return Fragment2.newInstance();
             }else if(position==2) {
-                return Fragment1.newInstance();
+                return Fragment3.newInstance();
+            }else if(position==3) {
+                return Fragment4.newInstance();
             }else{
                 return Fragment1.newInstance();
             }
@@ -444,79 +298,6 @@ try {
 
 
 
-    class ListAdapter extends BaseAdapter {
-        LayoutInflater layoutInflator;
-        private Context ctx;
-        ArrayList<String> valuesAppNames;
-        ArrayList<String> valuesAppDates;
-        ArrayList<String> valuesAppLinks;
-
-        public ListAdapter(Context ctx, ArrayList<String> name, ArrayList<String> datee, ArrayList<String> link){
-            this.ctx = ctx;
-            this.valuesAppNames = name;
-            this.valuesAppDates = datee;
-            this.valuesAppLinks = link;
-
-        }
-
-
-        @Override
-        public int getCount() {
-            return valuesAppNames.size();
-        }
-
-
-        @Override
-        public Object getItem(int i) {
-            return valuesAppNames.get(i);
-        }
-
-
-        @Override
-        public long getItemId(int i) {
-            return 0;
-        }
-
-        @Override
-        public View getView(final int i, View convertView, ViewGroup viewGroup) {
-            layoutInflator = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View view = convertView;
-            view = layoutInflator.inflate(R.layout.list_item, viewGroup, false);
-
-            TextView txtAppName  = (TextView)view.findViewById(R.id.txtAppName);
-            TextView txtDate  = (TextView)view.findViewById(R.id.txtDate);
-            ImageView imgDownload = (ImageView)view.findViewById(R.id.imgDownload);
-
-
-            txtAppName.setText(valuesAppNames.get(i));
-            txtDate.setText(valuesAppDates.get(i));
-           // txtAppName.setText(valuesAppLinks.get(i));
-
-            imgDownload.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    callDownloadAscyntask(valuesAppLinks.get(i), valuesAppNames.get(i) + ".apk");
-                    Log.e("Download link:- ", valuesAppLinks.get(i));
-                    //Toast.makeText(ctx,"Download link:- "+valuesAppLinks.get(i),Toast.LENGTH_SHORT).show();
-
-
-                    interstitial.loadAd(adRequest);
-                    // Prepare an Interstitial Ad Listener
-                    interstitial.setAdListener(new AdListener() {
-                        public void onAdLoaded() {
-                            // Call displayInterstitial() function
-                            displayInterstitial();
-                        }
-                    });
-                }
-            });
-
-            return view;
-        }
-
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

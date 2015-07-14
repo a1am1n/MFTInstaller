@@ -7,13 +7,7 @@
     android:background="#ffffff"
     tools:context=".MainActivity">
 
-    <com.twotoasters.jazzylistview.JazzyListView
-        android:dividerHeight="5dp"
-        android:divider="#ffffff"
-        android:id="@+id/applistView"
-        android:layout_above="@+id/ad"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+
 
 <LinearLayout
     android:orientation="vertical"

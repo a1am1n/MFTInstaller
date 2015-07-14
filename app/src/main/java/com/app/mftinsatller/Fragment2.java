@@ -5,9 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdListener;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -37,14 +36,14 @@ import java.util.List;
 /**
  * Created by Krishna on 14-07-2015.
  */
-public class Fragment1 extends Fragment {
+public class Fragment2 extends Fragment {
     ProgressDialog progressDialog,progressDialog2;
     JazzyListView applistView;
-    public static Fragment1 newInstance() {
-        Fragment1 f = new Fragment1();
+    public static Fragment2 newInstance() {
+        Fragment2 f = new Fragment2();
         return f;
     }
-    public Fragment1() {
+    public Fragment2() {
         // Required empty public constructor
     }
 
