@@ -32,6 +32,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -76,8 +77,8 @@ public class Fragment1 extends Fragment {
         progressDialog2.setMessage("Please wait...");
         progressDialog2.setCancelable(false);
         progressDialog2.show();
-
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("APK_Info");
+//Recommended_APK
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Recommended_APK");
 
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -102,6 +103,11 @@ public class Fragment1 extends Fragment {
                             appDates.add(i, created_on);
                             appLinks.add(i, download_link);
                         }
+
+
+                        Collections.sort(appNames);
+                        Collections.sort(appDates);
+                        Collections.sort(appLinks);
 
                         ListAdapter adp = new ListAdapter(getActivity(), appNames, appDates, appLinks);
                         applistView.setAdapter(adp);

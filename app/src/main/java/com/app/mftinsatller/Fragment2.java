@@ -31,6 +31,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -76,7 +77,7 @@ public class Fragment2 extends Fragment {
         progressDialog2.setCancelable(false);
         progressDialog2.show();
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("APK_Info");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Movies_APK");
 
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -102,13 +103,17 @@ public class Fragment2 extends Fragment {
                             appLinks.add(i, download_link);
                         }
 
+                        Collections.sort(appNames);
+                        Collections.sort(appDates);
+                        Collections.sort(appLinks);
+
                         ListAdapter adp = new ListAdapter(getActivity(), appNames, appDates, appLinks);
                         applistView.setAdapter(adp);
 
 
                     } else {
 
-                        Toast.makeText(getActivity(), "Unable to fetch data !!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "No data !!!", Toast.LENGTH_SHORT).show();
                     }
 
                 } else {
