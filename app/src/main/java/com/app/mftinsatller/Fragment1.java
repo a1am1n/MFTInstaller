@@ -18,6 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -41,6 +44,9 @@ import java.util.List;
 public class Fragment1 extends Fragment {
     ProgressDialog progressDialog,progressDialog2;
     JazzyListView applistView;
+
+    InterstitialAd interstitial;
+    AdRequest adRequest;
     public static Fragment1 newInstance() {
         Fragment1 f = new Fragment1();
         return f;
@@ -57,12 +63,28 @@ public class Fragment1 extends Fragment {
 
     }
 
+    public void displayInterstitial() {
+        // If Ads are loaded, show Interstitial else show nothing.
+        if (interstitial.isLoaded()) {
+            interstitial.show();
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
             View view =  inflater.inflate(R.layout.fragment1, container, false);
+
+
+
+        interstitial = new InterstitialAd(getActivity());
+        interstitial.setAdUnitId("ca-app-pub-4832975497842027/7436223590");
+        // Request for Ads
+        adRequest = new AdRequest.Builder()
+                .build();
+
+
 
         applistView = (JazzyListView)view.findViewById(R.id.applistView);
 
@@ -280,14 +302,14 @@ public class Fragment1 extends Fragment {
                     //Toast.makeText(ctx,"Download link:- "+valuesAppLinks.get(i),Toast.LENGTH_SHORT).show();
 
 
-                  /*  interstitial.loadAd(adRequest);
+                    interstitial.loadAd(adRequest);
                     // Prepare an Interstitial Ad Listener
                     interstitial.setAdListener(new AdListener() {
                         public void onAdLoaded() {
                             // Call displayInterstitial() function
                             displayInterstitial();
                         }
-                    });*/
+                    });
                 }
             });
 
