@@ -35,6 +35,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -109,6 +110,10 @@ public class Fragment3 extends Fragment {
                         ArrayList<String> appDates = new ArrayList<String>();
                         ArrayList<String> appLinks = new ArrayList<String>();
 
+                        ArrayList<currentData> currArray = new ArrayList<currentData>();
+
+                        Data3 obj = new Data3();
+
                         for (int i = 0; i < parseObjects.size(); i++) {
 
                             String app_name = parseObjects.get(i).getString("app_name");
@@ -116,16 +121,34 @@ public class Fragment3 extends Fragment {
                             String download_link = parseObjects.get(i).getString("download_link");
 
 
+                            currentData cur = new currentData();
+                            cur.appName = app_name;
+                            cur.date = created_on;
+                            cur.link = download_link;
+
                             appNames.add(i, app_name);
                             appDates.add(i, created_on);
                             appLinks.add(i, download_link);
+
+                            currArray.add(cur);
+
                         }
+
+
+                        obj.DATA = currArray;
+
 
 
                         Collections.sort(appNames);
                         Collections.sort(appDates);
                         Collections.sort(appLinks);
-                        ListAdapter adp = new ListAdapter(getActivity(), appNames, appDates, appLinks);
+
+
+
+
+
+                        ListAdapter adp = new ListAdapter(getActivity(), appNames, appDates, appLinks,obj);
+                        adp.sorting();
                         applistView.setAdapter(adp);
 
 
@@ -245,25 +268,35 @@ public class Fragment3 extends Fragment {
         ArrayList<String> valuesAppNames;
         ArrayList<String> valuesAppDates;
         ArrayList<String> valuesAppLinks;
+        Data3 valueOBJ;
 
-        public ListAdapter(Context ctx, ArrayList<String> name, ArrayList<String> datee, ArrayList<String> link){
+
+        List<currentData> ValuesSearch;
+        ArrayList<currentData> arraylist;
+
+        public ListAdapter(Context ctx, ArrayList<String> name, ArrayList<String> datee, ArrayList<String> link,Data3 dataObj){
             this.ctx = ctx;
             this.valuesAppNames = name;
             this.valuesAppDates = datee;
             this.valuesAppLinks = link;
+            this.valueOBJ = dataObj;
 
+            this.ValuesSearch = dataObj.DATA;
+
+            arraylist = new ArrayList<currentData>();
+            arraylist.addAll(ValuesSearch);
         }
 
 
         @Override
         public int getCount() {
-            return valuesAppNames.size();
+            return valueOBJ.DATA.size();
         }
 
 
         @Override
         public Object getItem(int i) {
-            return valuesAppNames.get(i);
+            return valueOBJ.DATA.get(i);
         }
 
 
@@ -283,16 +316,16 @@ public class Fragment3 extends Fragment {
             ImageView imgDownload = (ImageView)view.findViewById(R.id.imgDownload);
 
 
-            txtAppName.setText(valuesAppNames.get(i));
-            txtDate.setText(valuesAppDates.get(i));
+            txtAppName.setText(valueOBJ.DATA.get(i).appName);
+            txtDate.setText(valueOBJ.DATA.get(i).date);
             // txtAppName.setText(valuesAppLinks.get(i));
 
             imgDownload.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    callDownloadAscyntask(valuesAppLinks.get(i), valuesAppNames.get(i) + ".apk");
-                    Log.e("Download link:- ", valuesAppLinks.get(i));
+                    callDownloadAscyntask(valueOBJ.DATA.get(i).link, valueOBJ.DATA.get(i).appName + ".apk");
+                    Log.e("Download link:- ", valueOBJ.DATA.get(i).link);
                     //Toast.makeText(ctx,"Download link:- "+valuesAppLinks.get(i),Toast.LENGTH_SHORT).show();
 
 
@@ -310,7 +343,20 @@ public class Fragment3 extends Fragment {
             return view;
         }
 
+        // Filter Class
+        public void sorting() {
 
+                Collections.sort(ValuesSearch, new Comparator<currentData>() {
+                    @Override
+                    public int compare(currentData object1, currentData object2) {
+                        return object1.appName.compareTo(object2.appName);
+                    }
+                });
+
+
+
+            notifyDataSetChanged();
+        }
     }
 
 }
