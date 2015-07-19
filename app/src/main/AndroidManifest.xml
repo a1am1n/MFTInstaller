@@ -42,7 +42,7 @@
         <activity
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
+
             android:label="@string/app_name" >
 
         </activity>
@@ -50,7 +50,7 @@
         <activity
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             android:name=".LoginScreen"
-            android:screenOrientation="portrait"
+
             android:label="@string/app_name" >
 
         </activity>
@@ -59,7 +59,7 @@
         <activity
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             android:name=".RegisterationScreen"
-            android:screenOrientation="portrait"
+
             android:label="@string/app_name" >
 
         </activity>
@@ -68,7 +68,7 @@
         <activity
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             android:name=".RegistrationVerification"
-            android:screenOrientation="portrait"
+
             android:label="@string/app_name" >
 
         </activity>
@@ -77,7 +77,7 @@
         <activity
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             android:name=".ForgotPasswordScreen"
-            android:screenOrientation="portrait"
+
             android:label="@string/app_name" >
 
         </activity>
@@ -86,7 +86,7 @@
 
         <activity android:name=".SplashScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:screenOrientation="portrait">
+           >
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -97,7 +97,7 @@
         </activity>
 
 
-        <activity android:name=".Aboutus" android:screenOrientation="portrait"/>
+        <activity android:name=".Aboutus" />
 
         <!-- For google ads starts-->
         <meta-data
