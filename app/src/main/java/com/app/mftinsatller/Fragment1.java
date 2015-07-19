@@ -196,9 +196,13 @@ public class Fragment1 extends Fragment {
 
                 dialog.dismiss();
 
+
+
+
                 Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/.MFT/" + appName)), "application/vnd.android.package-archive");
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
                 startActivity(intent);
 
             }

@@ -3,6 +3,8 @@
     android:installLocation="preferExternal"
     package="com.app.mftinsatller" >
 
+    <uses-permission android:name="android.permission.INSTALL_PACKAGES"></uses-permission>
+    <uses-permission android:name="android.permission.DELETE_PACKAGES"></uses-permission>
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -35,6 +37,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
 
         <activity
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
