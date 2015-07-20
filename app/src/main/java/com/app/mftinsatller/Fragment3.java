@@ -137,11 +137,12 @@ public class Fragment3 extends Fragment {
 
                         obj.DATA = currArray;
 
-
+/*
 
                         Collections.sort(appNames);
                         Collections.sort(appDates);
                         Collections.sort(appLinks);
+*/
 
 
 
