@@ -244,7 +244,12 @@ public class Fragment1 extends Fragment {
             if (!file.exists()) {
                 file.mkdirs();
             }
-            File outputFile = new File(file, apkname);
+
+            String tempAPKNAMe = apkname;
+            String tempName = tempAPKNAMe.substring(apkname.lastIndexOf("/")+1,apkname.length());
+            Log.e("aPK NAme",tempName);
+
+            File outputFile = new File(file, tempName);
             FileOutputStream fos = new FileOutputStream(outputFile);
 
             //      Toast.makeText(getApplicationContext(), "SD Card Path: " + outputFile.toString(), Toast.LENGTH_SHORT).show();
