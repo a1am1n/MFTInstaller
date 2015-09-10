@@ -75,7 +75,7 @@ public class Fragment3 extends Fragment {
             View view =  inflater.inflate(R.layout.fragment1, container, false);
 
         interstitial = new InterstitialAd(getActivity());
-        interstitial.setAdUnitId("ca-app-pub-4832975497842027/7436223590");
+        interstitial.setAdUnitId("ca-app-pub-4832975497842027/4407080391");
         // Request for Ads
         adRequest = new AdRequest.Builder()
                 .build();
