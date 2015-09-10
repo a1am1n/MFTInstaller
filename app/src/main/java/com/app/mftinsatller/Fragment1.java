@@ -197,11 +197,14 @@ public class Fragment1 extends Fragment {
                 dialog.dismiss();
 
 
+                String tempAPKNAMe = appURL;
+                String tempName = tempAPKNAMe.substring(appURL.lastIndexOf("/")+1,appURL.length());
+
 
 
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/.MFT/" + appName)), "application/vnd.android.package-archive");
+                intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/MFT/" + tempName)), "application/vnd.android.package-archive");
 
                 startActivity(intent);
 
@@ -225,7 +228,7 @@ public class Fragment1 extends Fragment {
 
             //Toast.makeText(getApplicationContext(), "HttpURLConnection complete.", Toast.LENGTH_SHORT).show();
 
-            String PATH = Environment.getExternalStorageDirectory() + "/.MFT/";
+            String PATH = Environment.getExternalStorageDirectory() + "/MFT/";
             File file = new File(PATH);
 
             try {
@@ -244,9 +247,9 @@ public class Fragment1 extends Fragment {
             if (!file.exists()) {
                 file.mkdirs();
             }
-
-            String tempAPKNAMe = apkname;
-            String tempName = tempAPKNAMe.substring(apkname.lastIndexOf("/")+1,apkname.length());
+            Log.e("orfinal aPK NAme",apkpath);
+            String tempAPKNAMe = apkpath;
+            String tempName = tempAPKNAMe.substring(apkpath.lastIndexOf("/")+1,apkpath.length());
             Log.e("aPK NAme",tempName);
 
             File outputFile = new File(file, tempName);
