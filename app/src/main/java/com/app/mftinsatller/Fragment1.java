@@ -80,7 +80,7 @@ public class Fragment1 extends Fragment {
 
 
         interstitial = new InterstitialAd(getActivity());
-        interstitial.setAdUnitId("ca-app-pub-4832975497842027/4407080391");
+        interstitial.setAdUnitId("ca-app-pub-4832975497842027/7436223590");
         // Request for Ads
         adRequest = new AdRequest.Builder()
                 .build();
@@ -204,7 +204,7 @@ public class Fragment1 extends Fragment {
 
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/MFT/" + tempName)), "application/vnd.android.package-archive");
+                intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/.MFT/" + tempName)), "application/vnd.android.package-archive");
 
                 startActivity(intent);
 
@@ -228,7 +228,7 @@ public class Fragment1 extends Fragment {
 
             //Toast.makeText(getApplicationContext(), "HttpURLConnection complete.", Toast.LENGTH_SHORT).show();
 
-            String PATH = Environment.getExternalStorageDirectory() + "/MFT/";
+            String PATH = Environment.getExternalStorageDirectory() + "/.MFT/";
             File file = new File(PATH);
 
             try {
