@@ -69,6 +69,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
 
+
         String appKey = "0d5524b47bbf89f0a932276bd8121122ccd68637a50a814b";
         Appodeal.initialize(this, appKey, Appodeal.INTERSTITIAL | Appodeal.BANNER);
         Appodeal.show(this, Appodeal.BANNER_BOTTOM);
