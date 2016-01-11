@@ -86,7 +86,7 @@ public class Fragment5 extends Fragment {
         progressDialog2.setCancelable(false);
         progressDialog2.show();
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Music_APK");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("OtherApps");
 
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -107,7 +107,7 @@ public class Fragment5 extends Fragment {
                         for (int i = 0; i < parseObjects.size(); i++) {
 
                             String app_name = parseObjects.get(i).getString("app_name");
-                            String created_on = parseObjects.get(i).getString("upload_date");
+                            String created_on = parseObjects.get(i).getString("version");
                             String download_link = parseObjects.get(i).getString("download_link");
 
 
