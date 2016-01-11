@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.appodeal.ads.Appodeal;
 import com.astuetz.PagerSlidingTabStrip;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -56,8 +57,8 @@ import android.util.Log;
 public class MainActivity extends ActionBarActivity {
 
 
-    InterstitialAd interstitial;
-    AdRequest adRequest;
+   // InterstitialAd interstitial;
+  //  AdRequest adRequest;
 
     private PagerSlidingTabStrip tabs;
     private ViewPager pager;
@@ -68,11 +69,14 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
 
+        String appKey = "0d5524b47bbf89f0a932276bd8121122ccd68637a50a814b";
+        Appodeal.initialize(this, appKey, Appodeal.INTERSTITIAL | Appodeal.BANNER);
+        Appodeal.show(this, Appodeal.INTERSTITIAL);
 
-        interstitial = new InterstitialAd(MainActivity.this);
-        interstitial.setAdUnitId("ca-app-pub-4832975497842027/7436223590");
+     //   interstitial = new InterstitialAd(MainActivity.this);
+      //  interstitial.setAdUnitId("ca-app-pub-4832975497842027/7436223590");
 
-
+/*
         AdView adView = (AdView) findViewById(R.id.adView);
         // Request for Ads
         adRequest = new AdRequest.Builder()
@@ -80,7 +84,7 @@ public class MainActivity extends ActionBarActivity {
 
         // Load ads into Banner Ads
         adView.loadAd(adRequest);
-
+*/
 
 
 
@@ -123,9 +127,9 @@ public class MainActivity extends ActionBarActivity {
 
     public void displayInterstitial() {
         // If Ads are loaded, show Interstitial else show nothing.
-        if (interstitial.isLoaded()) {
+       /* if (interstitial.isLoaded()) {
             interstitial.show();
-        }
+        }*/
     }
 
 
