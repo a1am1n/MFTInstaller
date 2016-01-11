@@ -71,8 +71,8 @@ public class MainActivity extends ActionBarActivity {
 
 
         String appKey = "0d5524b47bbf89f0a932276bd8121122ccd68637a50a814b";
-        Appodeal.initialize(this, appKey, Appodeal.INTERSTITIAL | Appodeal.BANNER);
-        Appodeal.show(this, Appodeal.BANNER_BOTTOM);
+        Appodeal.initialize(this, appKey,Appodeal.VIDEO| Appodeal.INTERSTITIAL | Appodeal.BANNER);
+        Appodeal.show(this, Appodeal.VIDEO);
 
      //   interstitial = new InterstitialAd(MainActivity.this);
       //  interstitial.setAdUnitId("ca-app-pub-4832975497842027/7436223590");
