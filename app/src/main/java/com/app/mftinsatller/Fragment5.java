@@ -123,8 +123,6 @@ public class Fragment5 extends Fragment {
                             currArray.add(cur);
 
                         }
-
-
                         obj.DATA = currArray;
 
 
