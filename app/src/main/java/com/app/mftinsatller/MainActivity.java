@@ -71,7 +71,7 @@ public class MainActivity extends ActionBarActivity {
 
         String appKey = "0d5524b47bbf89f0a932276bd8121122ccd68637a50a814b";
         Appodeal.initialize(this, appKey, Appodeal.INTERSTITIAL | Appodeal.BANNER);
-        Appodeal.show(this, Appodeal.INTERSTITIAL);
+        Appodeal.show(this, Appodeal.BANNER_BOTTOM);
 
      //   interstitial = new InterstitialAd(MainActivity.this);
       //  interstitial.setAdUnitId("ca-app-pub-4832975497842027/7436223590");
@@ -241,7 +241,7 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-        private final String[] TITLES = { "Recommended", "Movies/TV", "Live TV","Music" };
+        private final String[] TITLES = { "Recommended", "Movies/TV", "Live TV","Music","Other Apps" };
 
 
 
@@ -283,6 +283,8 @@ public class MainActivity extends ActionBarActivity {
                 return Fragment3.newInstance();
             }else if(position==3) {
                 return Fragment4.newInstance();
+            }else if(position==4) {
+                return Fragment5.newInstance();
             }else{
                 return Fragment1.newInstance();
             }

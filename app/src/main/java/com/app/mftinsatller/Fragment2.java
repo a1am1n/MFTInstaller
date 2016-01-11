@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.appodeal.ads.Appodeal;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -42,8 +43,7 @@ import java.util.List;
  * Created by Krishna on 14-07-2015.
  */
 public class Fragment2 extends Fragment {
-    InterstitialAd interstitial;
-    AdRequest adRequest;
+
     ProgressDialog progressDialog,progressDialog2;
     JazzyListView applistView;
     public static Fragment2 newInstance() {
@@ -63,12 +63,7 @@ public class Fragment2 extends Fragment {
     }
 
 
-    public void displayInterstitial() {
-        // If Ads are loaded, show Interstitial else show nothing.
-        if (interstitial.isLoaded()) {
-            interstitial.show();
-        }
-    }
+
 
 
     @Override
@@ -77,11 +72,6 @@ public class Fragment2 extends Fragment {
         // Inflate the layout for this fragment
             View view =  inflater.inflate(R.layout.fragment1, container, false);
 
-        interstitial = new InterstitialAd(getActivity());
-        interstitial.setAdUnitId("ca-app-pub-4832975497842027/7436223590");
-        // Request for Ads
-        adRequest = new AdRequest.Builder()
-                .build();
 
 
 
@@ -331,15 +321,7 @@ public class Fragment2 extends Fragment {
                     Log.e("Download link:- ", valueOBJ.DATA.get(i).link);
                     //Toast.makeText(ctx,"Download link:- "+valuesAppLinks.get(i),Toast.LENGTH_SHORT).show();
 
-
-                    interstitial.loadAd(adRequest);
-                    // Prepare an Interstitial Ad Listener
-                    interstitial.setAdListener(new AdListener() {
-                        public void onAdLoaded() {
-                            // Call displayInterstitial() function
-                            displayInterstitial();
-                        }
-                    });
+                    Appodeal.show(getActivity(), Appodeal.INTERSTITIAL);
                 }
             });
 

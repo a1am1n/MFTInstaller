@@ -5,9 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +20,6 @@ import android.widget.Toast;
 import com.appodeal.ads.Appodeal;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -43,16 +42,15 @@ import java.util.List;
 /**
  * Created by Krishna on 14-07-2015.
  */
-public class Fragment1 extends Fragment {
+public class Fragment5 extends Fragment {
+
     ProgressDialog progressDialog,progressDialog2;
     JazzyListView applistView;
-
-
-    public static Fragment1 newInstance() {
-        Fragment1 f = new Fragment1();
+    public static Fragment5 newInstance() {
+        Fragment5 f = new Fragment5();
         return f;
     }
-    public Fragment1() {
+    public Fragment5() {
         // Required empty public constructor
     }
 
@@ -74,8 +72,6 @@ public class Fragment1 extends Fragment {
 
 
 
-
-
         applistView = (JazzyListView)view.findViewById(R.id.applistView);
 
         applistView.setTransitionEffect(new CardsEffect());
@@ -89,8 +85,8 @@ public class Fragment1 extends Fragment {
         progressDialog2.setMessage("Please wait...");
         progressDialog2.setCancelable(false);
         progressDialog2.show();
-//Recommended_APK
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Recommended_APK");
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Music_APK");
 
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -106,7 +102,7 @@ public class Fragment1 extends Fragment {
 
                         ArrayList<currentData> currArray = new ArrayList<currentData>();
 
-                        Data1 obj = new Data1();
+                        Data4 obj = new Data4();
 
                         for (int i = 0; i < parseObjects.size(); i++) {
 
@@ -148,7 +144,7 @@ public class Fragment1 extends Fragment {
 
                     } else {
 
-                        Toast.makeText(getActivity(), "Unable to fetch data !!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "No data !!!", Toast.LENGTH_SHORT).show();
                     }
 
                 } else {
@@ -185,16 +181,10 @@ public class Fragment1 extends Fragment {
 
                 dialog.dismiss();
 
-
-                String tempAPKNAMe = appURL;
-                String tempName = tempAPKNAMe.substring(appURL.lastIndexOf("/")+1,appURL.length());
-
-
-
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/.MFT/" + tempName)), "application/vnd.android.package-archive");
-
+                intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/.MFT/" + appName)), "application/vnd.android.package-archive");
+                //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
 
             }
@@ -236,12 +226,7 @@ public class Fragment1 extends Fragment {
             if (!file.exists()) {
                 file.mkdirs();
             }
-            Log.e("orfinal aPK NAme",apkpath);
-            String tempAPKNAMe = apkpath;
-            String tempName = tempAPKNAMe.substring(apkpath.lastIndexOf("/")+1,apkpath.length());
-            Log.e("aPK NAme",tempName);
-
-            File outputFile = new File(file, tempName);
+            File outputFile = new File(file, apkname);
             FileOutputStream fos = new FileOutputStream(outputFile);
 
             //      Toast.makeText(getApplicationContext(), "SD Card Path: " + outputFile.toString(), Toast.LENGTH_SHORT).show();
@@ -274,13 +259,13 @@ public class Fragment1 extends Fragment {
         ArrayList<String> valuesAppNames;
         ArrayList<String> valuesAppDates;
         ArrayList<String> valuesAppLinks;
-        Data1 valueOBJ;
+        Data4 valueOBJ;
 
 
         List<currentData> ValuesSearch;
         ArrayList<currentData> arraylist;
 
-        public ListAdapter(Context ctx, ArrayList<String> name, ArrayList<String> datee, ArrayList<String> link,Data1 dataObj){
+        public ListAdapter(Context ctx, ArrayList<String> name, ArrayList<String> datee, ArrayList<String> link,Data4 dataObj){
             this.ctx = ctx;
             this.valuesAppNames = name;
             this.valuesAppDates = datee;
@@ -333,7 +318,6 @@ public class Fragment1 extends Fragment {
                     callDownloadAscyntask(valueOBJ.DATA.get(i).link, valueOBJ.DATA.get(i).appName + ".apk");
                     Log.e("Download link:- ", valueOBJ.DATA.get(i).link);
                     //Toast.makeText(ctx,"Download link:- "+valuesAppLinks.get(i),Toast.LENGTH_SHORT).show();
-
 
                     Appodeal.show(getActivity(), Appodeal.INTERSTITIAL);
                 }
