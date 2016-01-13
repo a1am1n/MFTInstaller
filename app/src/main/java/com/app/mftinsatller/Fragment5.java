@@ -335,7 +335,6 @@ public class Fragment5 extends Fragment {
 
             return view;
         }
-
         // Filter Class
         public void sorting() {
 
