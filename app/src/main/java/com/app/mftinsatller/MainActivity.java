@@ -24,7 +24,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.appodeal.ads.Appodeal;
+import com.appnext.appnextinterstitial.InterstitialManager;
+import com.appnext.appnextinterstitial.OnAdLoaded;
 import com.astuetz.PagerSlidingTabStrip;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -58,7 +59,7 @@ public class MainActivity extends ActionBarActivity {
 
 
    // InterstitialAd interstitial;
-  //  AdRequest adRequest;
+    AdRequest adRequest;
 
     private PagerSlidingTabStrip tabs;
     private ViewPager pager;
@@ -68,13 +69,19 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        InterstitialManager.cacheInterstitial(MainActivity.this, getResources().getString(R.string.appnext_placementId),
+                InterstitialManager.INTERSTITIAL_VIDEO);
+        InterstitialManager.showInterstitial(MainActivity.this, getResources().getString(R.string.appnext_placementId),
+                InterstitialManager.INTERSTITIAL_VIDEO);
+        InterstitialManager.setSkipText("Skip");
+        InterstitialManager.setButtonColor("#273d4e");
+        InterstitialManager.setCanClose(true);
 
 
-        String appKey = "0d5524b47bbf89f0a932276bd8121122ccd68637a50a814b";
-        Appodeal.initialize(this, appKey,Appodeal.VIDEO| Appodeal.INTERSTITIAL | Appodeal.BANNER);
-        Appodeal.show(this, Appodeal.VIDEO);
 
-     //   interstitial = new InterstitialAd(MainActivity.this);
+
+
+        //   interstitial = new InterstitialAd(MainActivity.this);
       //  interstitial.setAdUnitId("ca-app-pub-4832975497842027/7436223590");
 
 /*

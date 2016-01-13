@@ -17,7 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.appodeal.ads.Appodeal;
+import com.appnext.appnextinterstitial.InterstitialManager;
+import com.appnext.appnextinterstitial.OnAdLoaded;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -334,8 +335,21 @@ public class Fragment1 extends Fragment {
                     Log.e("Download link:- ", valueOBJ.DATA.get(i).link);
                     //Toast.makeText(ctx,"Download link:- "+valuesAppLinks.get(i),Toast.LENGTH_SHORT).show();
 
+                    InterstitialManager.cacheInterstitial(getActivity(), getResources().getString(R.string.appnext_FullVideoplacementId),
+                            InterstitialManager.FULL_SCREEN_VIDEO);
+                    InterstitialManager.setSkipText("Skip");
+                    InterstitialManager.setButtonColor("#273d4e");
+                  //  InterstitialManager.setCanClose(true);
+                    InterstitialManager.setOnAdLoadedCallback(new OnAdLoaded() {
+                        @Override
+                        public void adLoaded() {
+                            InterstitialManager.showInterstitial(getActivity(), getResources().getString(R.string.appnext_FullVideoplacementId),
+                                    InterstitialManager.FULL_SCREEN_VIDEO);
+                        }
+                    });
 
-                    Appodeal.show(getActivity(), Appodeal.INTERSTITIAL);
+
+
                 }
             });
 
