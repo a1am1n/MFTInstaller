@@ -26,7 +26,7 @@
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/colors"
+        android:layout_above="@+id/ad"
         android:layout_below="@+id/tabs"
         tools:context=".MainActivity" />
 </LinearLayout>
@@ -38,6 +38,12 @@
         android:id="@+id/ad"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
+
+        <com.eslav.zeori276120.AdView
+            android:id="@+id/myAdView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
       <!--  <com.google.android.gms.ads.AdView
             android:id="@+id/adView"
             android:visibility="gone"

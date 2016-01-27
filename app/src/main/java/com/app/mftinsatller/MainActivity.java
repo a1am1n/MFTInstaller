@@ -17,99 +17,57 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.appnext.appnextinterstitial.InterstitialManager;
-import com.appnext.appnextinterstitial.OnAdLoaded;
 import com.astuetz.PagerSlidingTabStrip;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.twotoasters.jazzylistview.JazzyListView;
-import com.twotoasters.jazzylistview.effects.CardsEffect;
-import com.twotoasters.jazzylistview.effects.CurlEffect;
+import com.eslav.zeori276120.AdConfig;
+import com.eslav.zeori276120.AdListener;
+import com.eslav.zeori276120.AdView;
+import com.eslav.zeori276120.EulaListener;
+import com.eslav.zeori276120.Main;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import helpers.ComplexPreferences;
-import helpers.PrefUtils;
-import helpers.User;
-import android.util.Log;
-
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity   implements AdListener, EulaListener {
 
 
-   // InterstitialAd interstitial;
-    AdRequest adRequest;
 
+    private Main main; //Declare here
     private PagerSlidingTabStrip tabs;
     private ViewPager pager;
     private MyPagerAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        AdConfig.setAppId(298354);  //setting appid.
+        AdConfig.setApiKey("1453826219276120737"); //setting apikey
+        AdConfig.setEulaListener(this); //setting EULA listener.
+        AdConfig.setAdListener(this);  //setting global Ad listener.
+        AdConfig.setCachingEnabled(true); //Enabling SmartWall ad caching.
+        AdConfig.setPlacementId(0); //pass the placement id.
+        AdConfig.setEulaLanguage(AdConfig.EulaLanguage.ENGLISH); //Set the eula langauge
+
         setContentView(R.layout.activity_main);
 
-        InterstitialManager.cacheInterstitial(MainActivity.this, getResources().getString(R.string.appnext_placementId),
-                InterstitialManager.INTERSTITIAL_VIDEO);
-        InterstitialManager.showInterstitial(MainActivity.this, getResources().getString(R.string.appnext_placementId),
-                InterstitialManager.INTERSTITIAL_VIDEO);
-        InterstitialManager.setSkipText("Skip");
-        InterstitialManager.setButtonColor("#273d4e");
-        InterstitialManager.setCanClose(true);
+        //Initialize Airpush
+        main=new Main(this);
 
 
+        //for calling Smartwall ad
+        main.startInterstitialAd(AdConfig.AdType.smartwall);
 
+        AdView adView=(AdView) findViewById(R.id.myAdView);
 
+        adView.setBannerType(AdView.BANNER_TYPE_IN_APP_AD);
+        adView.setBannerAnimation(AdView.ANIMATION_TYPE_FADE);
+        adView.showMRinInApp(false);
+       // adView.setNewAdListener(this);
+        adView.loadAd();
 
-        //   interstitial = new InterstitialAd(MainActivity.this);
-      //  interstitial.setAdUnitId("ca-app-pub-4832975497842027/7436223590");
-
-/*
-        AdView adView = (AdView) findViewById(R.id.adView);
-        // Request for Ads
-        adRequest = new AdRequest.Builder()
-                .build();
-
-        // Load ads into Banner Ads
-        adView.loadAd(adRequest);
-*/
-
-
-
-
-
-/*
-        ComplexPreferences complexPreferences = ComplexPreferences.getComplexPreferences(MainActivity.this, "user_pref", 0);
-        User userData = complexPreferences.getObject("current-user", User.class);
-        Log.e("email ",userData.Email);
-
-        checkBlockStatus(userData.Email);
-*/
         init();
+    }
 
 
-
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     private void init(){
@@ -133,12 +91,73 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    public void displayInterstitial() {
-        // If Ads are loaded, show Interstitial else show nothing.
-       /* if (interstitial.isLoaded()) {
-            interstitial.show();
-        }*/
+
+
+    @Override
+    public void optinResult(boolean b) {
+
     }
+
+    @Override
+    public void showingEula() {
+
+    }
+
+    @Override
+    public void onAdCached(AdConfig.AdType adType) {
+
+    }
+
+    @Override
+    public void onIntegrationError(String s) {
+
+    }
+
+    @Override
+    public void onAdError(String s) {
+
+    }
+
+    @Override
+    public void noAdListener() {
+
+    }
+
+    @Override
+    public void onAdShowing() {
+
+    }
+
+    @Override
+    public void onAdClosed() {
+
+    }
+
+    @Override
+    public void onAdLoadingListener() {
+
+    }
+
+    @Override
+    public void onAdLoadedListener() {
+
+    }
+
+    @Override
+    public void onCloseListener() {
+
+    }
+
+    @Override
+    public void onAdExpandedListner() {
+
+    }
+
+    @Override
+    public void onAdClickedListener() {
+
+    }
+
 
 
     /*private void checkBlockStatus(final String useremail) {

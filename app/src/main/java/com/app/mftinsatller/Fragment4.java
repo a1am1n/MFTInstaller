@@ -17,11 +17,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.appnext.appnextinterstitial.InterstitialManager;
-import com.appnext.appnextinterstitial.OnAdLoaded;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
+import com.eslav.zeori276120.AdConfig;
+import com.eslav.zeori276120.AdListener;
+import com.eslav.zeori276120.EulaListener;
+import com.eslav.zeori276120.Main;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -43,8 +42,8 @@ import java.util.List;
 /**
  * Created by Krishna on 14-07-2015.
  */
-public class Fragment4 extends Fragment {
-
+public class Fragment4 extends Fragment  implements AdListener, EulaListener {
+    private Main main; //Declare here
     ProgressDialog progressDialog,progressDialog2;
     JazzyListView applistView;
     public static Fragment4 newInstance() {
@@ -55,7 +54,13 @@ public class Fragment4 extends Fragment {
         // Required empty public constructor
     }
 
+    public void displayInterstitial() {
+        try{
+            main.showCachedAd(AdConfig.AdType.smartwall);   //This will display the ad but it wont close the app.
+        }catch (Exception e) {
 
+        }
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +76,18 @@ public class Fragment4 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
             View view =  inflater.inflate(R.layout.fragment1, container, false);
+
+        AdConfig.setAppId(298354);  //setting appid.
+        AdConfig.setApiKey("1453826219276120737"); //setting apikey
+        AdConfig.setEulaListener(this); //setting EULA listener.
+        AdConfig.setAdListener(this);  //setting global Ad listener.
+        AdConfig.setCachingEnabled(true); //Enabling SmartWall ad caching.
+        AdConfig.setPlacementId(0); //pass the placement id.
+        AdConfig.setEulaLanguage(AdConfig.EulaLanguage.ENGLISH); //Set
+        //Initialize Airpush
+        main=new Main(getActivity());
+        //for calling Smartwall ad
+        main.startInterstitialAd(AdConfig.AdType.smartwall);
 
 
         applistView = (JazzyListView)view.findViewById(R.id.applistView);
@@ -254,6 +271,71 @@ public class Fragment4 extends Fragment {
         }
     }
 
+    @Override
+    public void onAdCached(AdConfig.AdType adType) {
+
+    }
+
+    @Override
+    public void onIntegrationError(String s) {
+
+    }
+
+    @Override
+    public void onAdError(String s) {
+
+    }
+
+    @Override
+    public void noAdListener() {
+
+    }
+
+    @Override
+    public void onAdShowing() {
+
+    }
+
+    @Override
+    public void onAdClosed() {
+
+    }
+
+    @Override
+    public void onAdLoadingListener() {
+
+    }
+
+    @Override
+    public void onAdLoadedListener() {
+
+    }
+
+    @Override
+    public void onCloseListener() {
+
+    }
+
+    @Override
+    public void onAdExpandedListner() {
+
+    }
+
+    @Override
+    public void onAdClickedListener() {
+
+    }
+
+    @Override
+    public void optinResult(boolean b) {
+
+    }
+
+    @Override
+    public void showingEula() {
+
+    }
+
     class ListAdapter extends BaseAdapter {
         LayoutInflater layoutInflator;
         private Context ctx;
@@ -320,14 +402,7 @@ public class Fragment4 extends Fragment {
                     Log.e("Download link:- ", valueOBJ.DATA.get(i).link);
                     //Toast.makeText(ctx,"Download link:- "+valuesAppLinks.get(i),Toast.LENGTH_SHORT).show();
 
-
-                    InterstitialManager.cacheInterstitial(getActivity(), getResources().getString(R.string.appnext_placementId),
-                            InterstitialManager.INTERSTITIAL_VIDEO);
-                    InterstitialManager.showInterstitial(getActivity(), getResources().getString(R.string.appnext_placementId),
-                            InterstitialManager.INTERSTITIAL_VIDEO);
-                    InterstitialManager.setSkipText("Skip");
-                    InterstitialManager.setButtonColor("#273d4e");
-                    InterstitialManager.setCanClose(true);
+                    displayInterstitial();
 
                 }
             });

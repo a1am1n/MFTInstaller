@@ -4,7 +4,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">About us</string>
 
-    <string name="appnext_placementId">4b8461f3-d09e-4670-b95e-063f7d845557</string>
-    <string name="appnext_FullVideoplacementId"> fd851308-ea7f-4de9-bff2-d5d91e6b8f3e</string>
+    <string name="airpushAPIKEY">1453826219276120737</string>
 
+    <string name="airpushAppID">298354</string>
 </resources>
